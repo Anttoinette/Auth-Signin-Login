@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
 import Welcome from './scenes/Welcome';
 import Login from './scenes/Login';
 import Signup from './scenes/Signup';
 import Content from './scenes/Content';
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+export const AuthContext = createContext(null);
 
 function App() {
   const [user, setUser] = useState();
   return (
+    <AuthContext.Provider value={{ user, setUser }}>
     <BrowserRouter>
     <div className="App">
       <header className="App-header">
@@ -22,8 +23,9 @@ function App() {
        </Routes>
       </header>
     </div>
-  ;</BrowserRouter>
-  )
+</BrowserRouter>
+</AuthContext.Provider>
+  );
 }
 
 export default App;
